@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Firebase Debug - Contact Form Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4f46e5;
+            padding-bottom: 10px;
+        }
+        .status {
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+        .status.success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .status.error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .status.info {
+            background: #d1ecf1;
+            color: #0c5460;
+            border: 1px solid #bee5eb;
+        }
+        code {
+            background: #f4f4f4;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: monospace;
+        }
+        button {
+            background: #4f46e5;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        button:hover {
+            background: #4338ca;
+        }
+        textarea {
+            width: 100%;
+            height: 100px;
+            padding: 10px;
+            font-family: monospace;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🔧 Firebase Debug & Test</h1>
+        
+        <div id="firebaseStatus" class="status info">
+            Checking Firebase initialization...
+        </div>
+
+        <h2>Configuration Check</h2>
+        <button onclick="checkFirebaseConfig()">Check Firebase Config</button>
+        <textarea id="configOutput" readonly></textarea>
+
+        <h2>Firestore Connection Test</h2>
+        <button onclick="testFirestoreConnection()">Test Firestore Connection</button>
+        <div id="firestoreStatus"></div>
+
+        <h2>Send Test Message</h2>
+        <label>Name: <input type="text" id="testName" value="Test User" style="width: 300px; padding: 8px;"></label><br><br>
+        <label>Email: <input type="email" id="testEmail" value="test@example.com" style="width: 300px; padding: 8px;"></label><br><br>
+        <label>Message: <textarea id="testMessage" style="width: 100%; height: 80px; padding: 8px;">This is a test message from the debug page.</textarea></label><br><br>
+        <button onclick="sendTestMessage()">Send Test Message to Firestore</button>
+        <div id="messageStatus"></div>
+
+        <h2>Browser Console</h2>
+        <p>Open DevTools (F12 or Right-click → Inspect → Console) to see detailed debug information.</p>
+    </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.7.0/firebase-analytics-compat.js"></script>
+
+    <!-- Firebase Configuration -->
+    <script src="js/firebase-config.js"></script>
+
+    <script>
+        // Check if Firebase is initialized
+        window.addEventListener('load', () => {
+            const statusDiv = document.getElementById('firebaseStatus');
+            if (typeof firebase !== 'undefined') {
+                if (firebase.apps.length > 0) {
+                    statusDiv.className = 'status success';
+                    statusDiv.innerHTML = '✓ Firebase initialized successfully! Project: ' + firebase.app().options.projectId;
+                    console.log('✓ Firebase initialized');
+                    console.log('Firebase config:', firebase.app().options);
+                } else {
+                    statusDiv.className = 'status error';
+                    statusDiv.innerHTML = '✗ Firebase SDK loaded but app not initialized';
+                }
+            } else {
+                statusDiv.className = 'status error';
+                statusDiv.innerHTML = '✗ Firebase SDK not loaded';
+            }
+        });
+
+        function checkFirebaseConfig() {
+            const output = document.getElementById('configOutput');
+            if (typeof firebase === 'undefined') {
+                output.value = 'ERROR: Firebase not loaded';
+                return;
+            }
+            
+            const config = firebase.app().options;
+            output.value = 'Firebase Configuration:\n' +
+                '======================\n' +
+                'apiKey: ' + config.apiKey + '\n' +
+                'authDomain: ' + config.authDomain + '\n' +
+                'projectId: ' + config.projectId + '\n' +
+                'storageBucket: ' + config.storageBucket + '\n' +
+                'messagingSenderId: ' + config.messagingSenderId + '\n' +
+                'appId: ' + config.appId + '\n\n' +
+                'Firestore: ' + (firebase.firestore ? 'Available' : 'Not available') + '\n' +
+                'Firebase version: ' + firebase.SDK_VERSION;
+            console.log('Config:', config);
+        }
+
+        async function testFirestoreConnection() {
+            const statusDiv = document.getElementById('firestoreStatus');
+            statusDiv.innerHTML = '<div class="status info">Testing connection...</div>';
+
+            try {
+                const db = firebase.firestore();
+                
+                // Try to get a simple collection to test connection
+                const collections = await db.collection('_test_connection').limit(1).get();
+                
+                statusDiv.innerHTML = '<div class="status success">✓ Firestore connection successful!</div>';
+                console.log('✓ Firestore is accessible');
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">✗ Firestore connection failed: ' + error.message + '</div>';
+                console.error('✗ Firestore error:', error);
+            }
+        }
+
+        async function sendTestMessage() {
+            const statusDiv = document.getElementById('messageStatus');
+            const nameInput = document.getElementById('testName');
+            const emailInput = document.getElementById('testEmail');
+            const messageInput = document.getElementById('testMessage');
+
+            statusDiv.innerHTML = '<div class="status info">Sending test message...</div>';
+
+            try {
+                const db = firebase.firestore();
+                
+                const docRef = await db.collection('contact_messages').add({
+                    name: nameInput.value || 'Test User',
+                    email: emailInput.value || 'test@example.com',
+                    message: messageInput.value || 'Test message',
+                    timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                    status: 'new',
+                    isTest: true
+                });
+
+                statusDiv.innerHTML = '<div class="status success">✓ Test message sent! Document ID: ' + docRef.id + '</div>';
+                console.log('✓ Message sent with ID:', docRef.id);
+            } catch (error) {
+                statusDiv.innerHTML = '<div class="status error">✗ Error sending message: ' + error.message + '</div>';
+                console.error('✗ Error:', error);
+            }
+        }
+    </script>
+</body>
+</html>
