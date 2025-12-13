@@ -36,10 +36,9 @@
         <div class="container d-flex flex-column flex-md-row align-items-center gap-5">
             <div class="col-md-6">
                 <h1 class="fw-bold mb-3">Hi, I'm <span class="text-accent">Kedar Pujari</span></h1>
-                <h4 class="text-light mb-4">Full-Stack Developer & AI/ML Enthusiast</h4>
+                <h4 class="text-light mb-4">Full-Stack Developer & cloud enthusiast.</h4>
                 <p class="fs-5 mb-4">Building innovative applications with modern technologies. Passionate about creating impactful digital solutions.</p>
                 <div class="d-flex flex-wrap gap-3">
-                    <a href="#contact" class="btn btn-accent">Get in Touch</a>
                     <a href="#projects" class="btn btn-accent">View My Work</a>
                     <a href="Kedar_Resume2.pdf" class="btn btn-accent" download="Kedar_Resume.pdf">
                         Get Resume <i class="bi bi-download ms-2"></i>
@@ -53,26 +52,27 @@
     </section>
 
     <section id="about" class="py-5">
-        <div class="container">
-            <h2 class="about-title text-center mb-5">About Me</h2>
-            <div class="row align-items-center">
-                <div class="col-md-4 text-center mb-4 mb-md-0">
-                    <img src="Aboutme.png" class="rounded shadow-lg" alt="About Me Photo" width="240">
-                </div>
-                <div class="col-md-8">
-                    <p class="fs-5 mb-4">
-                        I am a Computer Engineering graduate from SKN Sinhgad Institute of Technology and Science with expertise in software development, AI/ML, and cloud technologies. I have hands-on experience as an AI/ML Intern and Cyber Security Intern at Edunet Foundation, working on projects such as sales and profit trend analysis, inventory optimization, and steganography-based image detection using AI/ML.
-                    </p>
-                    <p class="fs-5 mb-4">
-                        Skilled in <strong>C++, Java, Python, HTML, CSS, JavaScript, SQL, Dart, Spring Boot, Hibernate, Flutter, and MongoDB</strong>, I am passionate about developing innovative applications. My projects include a college community mobile app and a food delivery web application, reflecting my interest in building impactful, user-centric solutions.
-                    </p>
-                    <div>
-                        <a href="#contact" class="btn btn-primary btn-lg">Connect with Me</a>
-                    </div>
+    <div class="container">
+        <h2 class="about-title text-center mb-5">About Me</h2>
+        <div class="row align-items-center">
+            <div class="col-md-4 text-center mb-4 mb-md-0">
+                <img src="Aboutme.png" class="rounded shadow-lg" alt="About Me Photo" width="240">
+            </div>
+            <div class="col-md-8">
+                <p class="fs-5 mb-4">
+                    I am a Computer Engineering graduate from SKN Sinhgad Institute of Technology and Science, currently working as a Full-Time Software Engineer at Cognizant. With a strong foundation in Java, Springboot, and cloud technologies, I am dedicated to building scalable and innovative enterprise-level applications that deliver real business value.
+                </p>
+                <p class="fs-5 mb-4">
+                    At Cognizant, I am actively involved in developing and maintaining enterprise applications, collaborating with cross-functional teams, and implementing code optimization and deployment best practices. I bring hands-on experience from my previous roles as an AI/ML Intern and Cyber Security Intern at Edunet Foundation, where I worked on projects such as sales and profit trend analysis, inventory optimization, and steganography-based image detection using AI/ML.
+                </p>
+                
+                <div>
+                    <a href="#contact" class="btn btn-primary btn-lg">Connect with Me</a>
                 </div>
             </div>
         </div>
-    </section>
+    </div>
+</section>
 
     <section id="skills" class="py-5">
   <div class="container">
@@ -178,7 +178,7 @@
       </div>
       <div class="timeline-item">
         <div class="timeline-dot"></div>
-        <div class="timeline-content">
+        <div class="timeline-content">  
           <h5 class="fw-bold mb-1">Intern <span class="text-muted">| Cognizant</span></h5>
           <span class="timeline-date">Mar 2025 — June 2025</span>
           <ul>
@@ -249,66 +249,89 @@
 
     <section id="projects" class="py-5">
         <div class="container">
-            <h2 class="text-center mb-5">Featured Projects</h2>
+            <div class="projects-header mb-5">
+                <h2 class="mb-3">Featured Projects</h2>
+                <p class="projects-subtitle">Innovative solutions built with modern technologies</p>
+            </div>
             <div class="row g-4 justify-content-center">
                 <!-- Project Card 1 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card-portfolio">
-                        <div class="project-img-portfolio">
+                    <div class="project-card">
+                        <div class="project-image">
                             <img src="images/project1.png" alt="College Community App">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link-btn" title="View Demo"><i class="bi bi-eye"></i></a>
+                                    <a href="#" class="project-link-btn" title="View Code"><i class="bi bi-github"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-title-bar">
-                            <span class="project-title-portfolio">College-Community</span>
-                        </div>
-                        <div class="project-desc-portfolio">
-                            <p class="mb-3">
+                        <div class="project-content">
+                            <h3 class="project-title">College-Community</h3>
+                            <p class="project-description">
                                 A cross-platform college community app built with Flutter and Firebase, featuring real-time notices, club management, academic resources, and community engagement.
                             </p>
-                            <div class="d-flex gap-2">
-                                <a href="#" class="project-btn-portfolio"><i class="bi bi-eye"></i> View</a>
-                                <a href="#" class="project-btn-portfolio"><i class="bi bi-code-slash"></i> Code</a>
+                            <div class="project-tags">
+                                <span class="tag">Flutter</span>
+                                <span class="tag">Firebase</span>
+                                <span class="tag">Mobile</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Project Card 2 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card-portfolio">
-                        <div class="project-img-portfolio">
+                    <div class="project-card">
+                        <div class="project-image">
                             <img src="images/project2.png" alt="Food Delivery Website">
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link-btn" title="View Demo"><i class="bi bi-eye"></i></a>
+                                    <a href="#" class="project-link-btn" title="View Code"><i class="bi bi-github"></i></a>
+                                </div>
+                            </div>
                         </div>
-                        <div class="project-title-bar">
-                            <span class="project-title-portfolio">Food Delivery</span>
-                        </div>
-                        <div class="project-desc-portfolio">
-                            <p class="mb-3">
+                        <div class="project-content">
+                            <h3 class="project-title">Food Delivery</h3>
+                            <p class="project-description">
                                 A responsive food delivery web application built with Bootstrap and Spring Boot, featuring user authentication, order tracking, and an intuitive UI.
                             </p>
-                            <div class="d-flex gap-2">
-                                <a href="#" class="project-btn-portfolio"><i class="bi bi-eye"></i> View</a>
-                                <!-- <a href="#" class="project-btn-portfolio"><i class="bi bi-code-slash"></i> Code</a> -->
+                            <div class="project-tags">
+                                <span class="tag">Spring Boot</span>
+                                <span class="tag">Bootstrap</span>
+                                <span class="tag">Web</span>
                             </div>
                         </div>
                     </div>
                 </div>
                 <!-- Project Card 3 -->
                 <div class="col-lg-4 col-md-6">
-                    <div class="project-card-portfolio">
-                        <div class="project-img-portfolio">
+                    <div class="project-card">
+                        <div class="project-image">
                             <img src="images/project1.png" alt="ResumeGen">
-                        </div>
-                        <div class="project-title-bar">
-                            <span class="project-title-portfolio">ResumeGen</span>
-                        </div>
-                        <div class="project-desc-portfolio">
-                            <p class="mb-3">
-                                A tool to build, print, and download a professional resume for free in minutes. Multiple templates and easy editing.
-                            </p>
-                            <div class="d-flex gap-2">
-                                <a href="#" class="project-btn-portfolio"><i class="bi bi-eye"></i> View</a>
-                                
+                            <div class="project-overlay">
+                                <div class="project-links">
+                                    <a href="#" class="project-link-btn" title="View Demo"><i class="bi bi-eye"></i></a>
+                                    <a href="#" class="project-link-btn" title="View Code"><i class="bi bi-github"></i></a>
+                                </div>
                             </div>
                         </div>
+                        <div class="project-content">
+                            <h3 class="project-title">ResumeGen</h3>
+                            <p class="project-description">
+                                A tool to build, print, and download a professional resume for free in minutes. Multiple templates and easy editing.
+                            </p>
+                            <div class="project-tags">
+                                <span class="tag">Web App</span>
+                                <span class="tag">Resume</span>
+                                <span class="tag">Tool</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
                     </div>
                 </div>
             </div>
